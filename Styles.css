@@ -1,0 +1,94 @@
+body {
+    background-color: #344955;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 200px;
+}
+nav {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+ul {
+    display: flex;
+    gap: 100px;
+}
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: white ;
+    gap: 100px;
+    height: 750px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+ul {
+    list-style-type: none;
+    font-size: 25px;
+    color: blue;
+}
+
+.gambar {
+    width: 500px;
+    border: 1px solid;
+}
+
+.border-gambar {
+    width: 500px;
+    height: 500px;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+  }
+ 
+  @media only screen and (max-width: 768px) {
+    header {
+        height: auto;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    main {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .gambar {
+        width: 100%;
+    }
+
+    .border-gambar {
+        width: 100%;
+        height: auto;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
