@@ -1,0 +1,36 @@
+Nama  :qw
+Email  :mi5011487@gmail.com
+Alamat  :eqe
+Produk  :produk1
+Jumlah  :2
+
+Nama  :qw
+Email  :mi5011487@gmail.com
+Alamat  :eqe
+Produk  :produk1
+Jumlah  :0
+
+Nama  :qw
+Email  :mi5011487@gmail.com
+Alamat  :eqe
+Produk  :produk1
+Jumlah  :0
+
+Nama  :qw
+Email  :mi5011487@gmail.com
+Alamat  :eqe
+Produk  :produk1
+Jumlah  :0
+
+Nama  :adw
+Email  :awd@gamil.DW
+Alamat  :AWD
+Produk  :produk1
+Jumlah  :1
+
+Nama  :sda
+Email  :mi5011487@gmail.com
+Alamat  :saas
+Produk  :produk1
+Jumlah  :4
+
