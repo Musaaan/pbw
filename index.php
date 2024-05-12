@@ -61,6 +61,13 @@
             color: #555;
         }
     </style>
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Hapus data ini?")==true){
+                window.location.href = 'hapusdiary.php?id=' + id;
+            }           
+        }
+    </script>
 </head>
 
 <body>
@@ -84,6 +91,7 @@
             <th>No.</th>
             <th>Diary.</th>
             <th>Tanggal.</th>
+            <th>Aksi</th>
         </tr>
         <?php
         $nomor = 0;
@@ -94,6 +102,8 @@
             <td><?php echo $nomor; ?></td>
             <td><b><?php echo $row[1]; ?></b><br/><?php echo $row[2]; ?></td>
             <td><?php echo $row[3]; ?></td>
+            <td><a href="editdiary.php?id=<?php echo $row[0];?>">Edit</a>
+            <a href="#" onclick="confirmDelete(<?php echo $row[0];?>)">Hapus</a></td>
         </tr>
         <?php
         }
