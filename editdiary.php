@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,24 +63,36 @@
 <body>
     <?php
     require_once "koneksi.php";
-    $sql = "SElECT judul, isian FROM diary WHERE id=". $_GET['id'];
-    $result = mysqli_query($conn, $sql);
-    $data = mysqli_fetch_array($result);
+    if (isset($_GET['id'])){
+        $id = intval($_GET['id']);
+        $user_id = $_SESSION['user_id'];
+        $sql = "SELECT * FROM diary WHERE id = $id AND user_id = $user_id";
+        $result = mysqli_query ($conn, $sql);
+
+        if ($row = mysqli_fetch_assoc($result)){
     ?>
 
     <div class="container">
         <h1> Edit Diary</h1>
-        <form action="prosesedit.php?id=<?php echo $_GET['id']?>" method="POST">
+        <form action="prosesedit.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>"/>
             Diary tentang...<br>
-            <input type="text" name="judul" size="70" value="<?php echo $data[0]?>"> <br>
+            <input type="text" name="judul" size="70" value="<?php echo $row['judul'];?>"/>
             <br>
             Gimana ceritanya?<br>
-            <textarea name="isian" cols="70" rows="10"><?php echo $data[1]?> </textarea>
+            <textarea name="isian" cols="70" rows="10"><?php echo $row['isian'];?></textarea>
             <br>
             <br>
             <input type="submit" value="Simpan">
         </form>
     </div>
-
+    <?php
+        }else{
+            echo "Diary tidak ditemukan atau Anda tidak memiliki akses.";
+        }
+    }else{
+        "ID tidak valid.";
+    }
+        ?>
 </body>
 </html>

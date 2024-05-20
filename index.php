@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit ();
+}
+require_once "koneksi.php";
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+
+$sql = "SELECT * FROM diary WHERE user_id = $user_id ORDER BY id DESC";
+$result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
+?>
 <html>
 <head>
     <style>
@@ -71,21 +88,13 @@
 </head>
 
 <body>
+    <a href= "logout.php" class="logout-button">Logout</a>
     <h1>Dear Diary</h1>
+    <div class="wellcome-message">Selamat Datang, <?php echo htmlspecialchars($username); ?></div>
     <center><a href="newdiary.php" class="write-diary-button">Tulis Diary</a></center>
     <?php
-    require_once "koneksi.php";
-
-    $sql = "SELECT * FROM diary ORDER BY id DESC";
-    $result = mysqli_query ($conn, $sql);
-
-    if (!$result){
-        die ("Error: " . mysqli_error($conn));
-    }
-
     if (mysqli_num_rows($result) > 0){
     ?>
-
     <table>
         <tr>
             <th>No.</th>
@@ -100,8 +109,8 @@
         ?>
         <tr>
             <td><?php echo $nomor; ?></td>
-            <td><b><?php echo $row[1]; ?></b><br/><?php echo $row[2]; ?></td>
-            <td><?php echo $row[3]; ?></td>
+            <td><b><?php echo $row['judul']; ?></b><br/><?php echo $row['isian']; ?></td>
+            <td><?php echo $row['tanggal']; ?></td>
             <td><a href="editdiary.php?id=<?php echo $row[0];?>">Edit</a>
             <a href="#" onclick="confirmDelete(<?php echo $row[0];?>)">Hapus</a></td>
         </tr>

@@ -1,21 +1,26 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit();
+}
+
 require_once "koneksi.php";
 
-if (!isset($_POST['judul'])) {
-    echo "<p>Judul tidak boleh kosong. </p>";
-    exit ();
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $id = intval($_POST['id']); 
+  $user_id = $_SESSION['user_id'];
+  $judul = mysqli_real_escape_string($conn, $_POST['judul']);
+  $isian = mysqli_real_escape_string($conn, $_POST['isian']); 
 
-if (!isset($_POST['isian'])) {
-    echo "<p>Isian tidak boleh kosong. </p>";
-    exit ();
-}
+  $sql = "UPDATE diary SET judul='$judul', isian='$isian' WHERE id=$id AND user_id=$user_id";
 
-$sql = "UPDATE diary SET judul='$_POST[judul]', isian='$_POST[isian]' WHERE id=$_GET[id]";
-if (mysqli_query($conn, $sql)) {
-    header ("refresh:3;url=index.php");
-    echo "<p>Data berhasil disimpan.</p>";
+  if (mysqli_query($conn, $sql)) {
+    header("Location: index.php");
+    exit();
+  } else {
+    echo "Error: " . mysqli_error($conn);
+  }
 }
-else {
-    echo "<p>Ups, data gagal disimpan : </p>";
-}
+?>

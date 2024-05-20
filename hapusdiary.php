@@ -1,12 +1,25 @@
 <?php
-require_once "koneksi.php";
+session_start();
 
-$sql = "DELETE FROM diary WHERE id=" . $_GET['id'];
-if (mysqli_query($conn, $sql)) {
-    header ("refresh:3;url=index.php");
-    echo "<p>Data berhasil disimpan.</p>";
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit();
 }
-else {
-    echo "<p>Ups, data gagal disimpan : </p>";
+
+require_once "koneksi.php";
+if (isset($_GET['id'])) {
+  $id = intval($_GET['id']); 
+
+  $user_id = $_SESSION['user_id'];
+  $sql = "DELETE FROM diary WHERE id = $id AND user_id = $user_id";
+
+  if (mysqli_query($conn, $sql)) {
+    header("Location: index.php");
+    exit();
+  } else {
+    echo "Error: " . mysqli_error($conn);
+  }
+} else {
+  echo "Invalid diary entry ID.";
 }
 ?>
